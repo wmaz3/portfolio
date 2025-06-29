@@ -21,7 +21,6 @@
       cursor: pointer;
       border: 1px solid #ccc;
       background-color: #f8f8f8;
-      aspect-ratio: auto;
     }
 
     .lightbox {
@@ -113,14 +112,6 @@
           const thumb = document.createElement('img');
           thumb.src = imgData.src;
           thumb.alt = "Zdjęcie";
-          thumb.addEventListener('load', () => {
-            if (thumb.naturalWidth > thumb.naturalHeight) {
-              thumb.style.aspectRatio = `${thumb.naturalWidth} / ${thumb.naturalHeight}`;
-            } else {
-              thumb.style.height = '100%';
-              thumb.style.width = 'auto';
-            }
-          });
           thumb.addEventListener('click', () => {
             lightboxImg.src = imgData.src;
             lightbox.style.display = 'flex';
