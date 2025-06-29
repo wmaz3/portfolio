@@ -1,14 +1,5 @@
 [
-  {
-    "src": "foto1.JPG",
-    "title": "Projekt: Ołtarz Boże Ciało"
-  },
-  {
-    "src": "img/foto2.jpg",
-    "title": "Portret: Światło naturalne"
-  },
-  {
-    "src": "img/foto3.jpg",
-    "title": "Detal architektury"
-  }
+  {    "src": "img/foto1.JPG"},
+  {    "src": "img/foto2.jpg"},
+  {    "src": "img/foto3.jpg"}
 ]
