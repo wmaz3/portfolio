@@ -16,35 +16,49 @@
       display: flex;
       flex-direction: column;
       align-items: center;
+      background-color: #f9f9f9;
     }
 
     header, footer {
       width: 100%;
       text-align: center;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.1);
     }
 
     main {
       max-width: 1200px;
       width: 100%;
       margin: 0 auto;
-      padding: 0 20px;
+      padding: 40px 20px;
       display: flex;
       flex-direction: column;
       align-items: center;
+      background-color: #fff;
     }
 
-    .about {
-      text-align: center;
-      max-width: 800px;
+    .content-wrapper {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
       width: 100%;
+      gap: 40px;
+      border-top: 1px solid #ddd;
+      padding-top: 40px;
     }
 
     .gallery {
-      max-width: 1000px;
-      width: 100%;
+      flex: 1;
+      min-width: 300px;
+      max-width: 65%;
       display: flex;
       flex-direction: column;
       align-items: center;
+      border-right: 1px solid #ddd;
+      padding-right: 20px;
     }
 
     .gallery-grid {
@@ -66,6 +80,44 @@
       display: block;
     }
 
+    .sidebar {
+      flex: 1;
+      min-width: 250px;
+      max-width: 30%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 40px;
+      padding-left: 20px;
+    }
+
+    .about, .contact {
+      width: 100%;
+      background-color: #fafafa;
+      padding: 20px;
+      border-left: 2px solid #ccc;
+    }
+
+    .about img {
+      width: 100%;
+      max-width: 200px;
+      border-radius: 50%;
+      display: block;
+      margin: 0 auto 20px auto;
+    }
+
+    .contact a {
+      display: inline-block;
+      margin: 5px 10px;
+      color: #333;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .contact a:hover {
+      text-decoration: underline;
+    }
+
     .lightbox {
       display: none;
       position: fixed;
@@ -77,6 +129,7 @@
       background: rgba(0, 0, 0, 0.9);
       justify-content: center;
       align-items: center;
+      flex-direction: column;
     }
 
     .lightbox img {
@@ -85,21 +138,53 @@
       box-shadow: 0 0 10px #000;
     }
 
-    .lightbox .close {
+    .lightbox .close, .lightbox .prev, .lightbox .next {
       position: absolute;
       top: 20px;
-      right: 30px;
       font-size: 30px;
       font-weight: bold;
       color: white;
       cursor: pointer;
       z-index: 1000;
+      user-select: none;
+    }
+
+    .lightbox .close {
+      right: 30px;
+    }
+
+    .lightbox .prev {
+      left: 30px;
+      top: 50%;
+      transform: translateY(-50%);
+    }
+
+    .lightbox .next {
+      right: 30px;
+      top: 50%;
+      transform: translateY(-50%);
     }
 
     @media (max-width: 800px) {
-      .gallery {
-        width: 100%;
-        padding: 0 10px;
+      .content-wrapper {
+        flex-direction: column;
+        align-items: center;
+        border-right: none;
+        border-left: none;
+        padding: 0;
+      }
+
+      .gallery, .sidebar {
+        max-width: 100%;
+        border: none;
+        padding: 0;
+      }
+
+      .about, .contact {
+        border-left: none;
+        border-top: 1px solid #ddd;
+        margin-top: 20px;
+        padding-top: 20px;
       }
     }
   </style>
@@ -110,38 +195,41 @@
   </header>
 
   <main>
-    
-    <!-- <section class="projects">
-      <h2>Wybrane Projekty</h2>
-      <ul>
-        <li>Projekt A – opis projektu, rola, użyte technologie</li>
-        <li>Projekt B – opis projektu, rola, użyte technologie</li>
-      </ul>
-    </section> -->
+    <div class="content-wrapper">
+      <section class="gallery">
+        <h2>Galeria</h2>
+        <div class="gallery-grid"></div>
+      </section>
 
-    
-    <section class="gallery">
-      <h2>Galeria</h2>
-      <div class="gallery-grid"></div>
-    </section>
-    
-
-    <section class="about">
+      <div class="sidebar">
+        <section class="about">
+          <img src="profile.jpg" alt="Zdjęcie profilowe">
       <h2>O mnie</h2>
       <p>Inżynier Transportu Kolejowego / Politechnika Śląska</p>
       <p>Motorniczy / Tramwaje Śląske S.A.</p>
     </section>
+        
+        <section class="contact">
+          <h2>Kontakt</h2>
+          <p>w.m.11@onet.eu</p>
+          <p>
+            <a href="https://www.facebook.com/wojtek.mazur.923" target="_blank">Facebook</a>
+            <a href="https://discord.com/users/twojid" target="_blank">Discord</a>
+          </p>
+        </section>
+      </div>
+    </div>
   </main>
 
   <footer>
     <p>Kontakt: w.m.11@onet.eu</p>
   </footer>
-
-  <!-- <script src="gallery.js"></script> -->
   
   <div id="lightbox" class="lightbox">
     <span class="close" id="lightbox-close">&times;</span>
+    <span class="prev" id="lightbox-prev">&#10094;</span>
     <img src="" alt="Podgląd" id="lightbox-img">
+    <span class="next" id="lightbox-next">&#10095;</span>
   </div>
 
   <script>
@@ -149,32 +237,60 @@
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const closeBtn = document.getElementById('lightbox-close');
+    const prevBtn = document.getElementById('lightbox-prev');
+    const nextBtn = document.getElementById('lightbox-next');
+
+    let images = [];
+    let currentIndex = 0;
 
     fetch('gallery.json')
       .then(res => res.json())
-      .then(images => {
-        images.forEach(imgData => {
+      .then(data => {
+        images = data;
+        if (!images.length) return;
+        images.forEach((imgData, index) => {
           const thumb = document.createElement('img');
           thumb.src = imgData.src;
           thumb.alt = "Zdjęcie";
-          thumb.addEventListener('click', () => {
-            lightboxImg.src = imgData.src;
-            lightbox.style.display = 'flex';
-          });
+          thumb.addEventListener('click', () => openLightbox(index));
           galleryContainer.appendChild(thumb);
         });
       });
 
-    closeBtn.addEventListener('click', () => {
+    function openLightbox(index) {
+      currentIndex = index;
+      lightboxImg.src = images[currentIndex].src;
+      lightbox.style.display = 'flex';
+    }
+
+    function closeLightbox() {
       lightbox.style.display = 'none';
       lightboxImg.src = '';
-    });
+    }
+
+    function showNext() {
+      currentIndex = (currentIndex + 1) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+    }
+
+    function showPrev() {
+      currentIndex = (currentIndex - 1 + images.length) % images.length;
+      lightboxImg.src = images[currentIndex].src;
+    }
+
+    closeBtn.addEventListener('click', closeLightbox);
+    prevBtn.addEventListener('click', showPrev);
+    nextBtn.addEventListener('click', showNext);
 
     window.addEventListener('click', (e) => {
-      if (e.target === lightbox) {
-        lightbox.style.display = 'none';
-        lightboxImg.src = '';
-      }
+      if (e.target === lightbox) closeLightbox();
+    });
+
+    window.addEventListener('keydown', (e) => {
+      if (lightbox.style.display !== 'flex') return;
+      if (e.key === 'ArrowLeft') showPrev();
+      if (e.key === 'ArrowRight') showNext();
+      if (e.key === 'Escape') closeLightbox();
     });
   </script>
   
