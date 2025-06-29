@@ -4,24 +4,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Portfolio Wojciech Mazur</title>
+  <title>Zdjęcia Wojciech Mazur</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+      font-family: sans-serif;
+    }
+
+    main {
+      display: grid;
+      grid-template-columns: 1fr 3fr;
+      gap: 40px;
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    .about {
+      text-align: left;
+    }
+
     .gallery-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 10px;
+      gap: 0;
       margin-top: 20px;
+      border: 1px solid #ccc;
     }
 
     .gallery-grid img {
       width: 100%;
-      height: auto;
-      object-fit: contain;
+      height: 250px;
+      object-fit: cover;
       cursor: pointer;
-      border: 1px solid #ccc;
+      border-bottom: 1px solid #ccc;
+      border-right: 1px solid #ccc;
       background-color: #f8f8f8;
-      aspect-ratio: auto;
+    }
+
+    .gallery-grid img:nth-child(3n) {
+      border-right: none;
+    }
+
+    .gallery-grid img:nth-last-child(-n+3) {
+      border-bottom: none;
     }
 
     .gallery-grid img.landscape {
@@ -59,6 +88,11 @@
     }
 
     @media (max-width: 800px) {
+      main {
+        display: block;
+        padding: 0 10px;
+      }
+
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -78,7 +112,7 @@
    <section class="about">
       <h2>O mnie</h2>
       <p>Inżynier Transportu Kolejowego / Politechnika Śląska</p>
-      <p>Od 2021 - Motorniczy / Tramwaje Śląske S.A.</p>
+      <p>Motorniczy / Tramwaje Śląske S.A.</p>
    </section>
 
     <!-- <section class="projects">
