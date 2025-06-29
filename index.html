@@ -7,6 +7,15 @@
   <title>Foto Wojciech Mazur</title>
   <link rel="stylesheet" href="style.css">
   <style>
+    aside {
+      width: 300px;
+    }
+
+    .about {
+      text-align: center;
+      max-width: 300px;
+    }
+    
     .gallery-grid {
       display: flex;
       flex-wrap: wrap;
@@ -60,6 +69,10 @@
       .gallery-grid {
         grid-template-columns: repeat(2, 1fr);
       }
+      aside {
+        width: 100%;
+        max-width: 600px;
+      }
     }
   </style>
 </head>
@@ -67,14 +80,15 @@
   <header>
     <h1>Wojciech Mazur</h1>
   </header>
-
+<aside>
+      <section class="about">
+        <h2>O mnie</h2>
+        <p>Inżynier Transportu Kolejowego / Politechnika Śląska</p>
+        <p>Motorniczy / Tramwaje Śląske S.A.</p>
+      </section>
+    </aside>
   <main>
-   <section class="about">
-      <h2>O mnie</h2>
-      <p>Inżynier Transportu Kolejowego / Politechnika Śląska</p>
-      <p>Motorniczy / Tramwaje Śląske S.A.</p>
-   </section>
-
+    
     <!-- <section class="projects">
       <h2>Wybrane Projekty</h2>
       <ul>
